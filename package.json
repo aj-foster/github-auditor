@@ -1,0 +1,29 @@
+{
+  "name": "github-auditor",
+  "version": "0.1.0",
+  "description": "Creates reports on a GitHub organization's members, teams, and repository access rights.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aj-foster/github-auditor.git"
+  },
+  "keywords": [
+    "github",
+    "audit",
+    "security",
+    "access",
+    "report"
+  ],
+  "author": "AJ Foster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aj-foster/github-auditor/issues"
+  },
+  "homepage": "https://github.com/aj-foster/github-auditor#readme",
+  "devDependencies": {
+    "eslint": "^4.15.0"
+  }
+}
