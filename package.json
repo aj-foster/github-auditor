@@ -25,5 +25,8 @@
   "homepage": "https://github.com/aj-foster/github-auditor#readme",
   "devDependencies": {
     "eslint": "^4.15.0"
+  },
+  "dependencies": {
+    "graphql-request": "^1.4.1"
   }
 }
