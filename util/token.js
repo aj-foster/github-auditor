@@ -1,5 +1,11 @@
 let fs = require('fs')
 
+/* Retrieve a token from tokens.secret.
+ *
+ * We expect the user has stored a personal access token in a file called
+ * token.secret at the base of the application directory. This function loads
+ * it into memory as `global.token` and does some primitive sanity checks.
+ */
 exports.getToken = function () {
   const fileContents = fs.readFileSync('token.secret', 'utf8')
 
