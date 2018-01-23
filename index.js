@@ -15,6 +15,9 @@ async function main() {
     .catch(err => {
       throw err
     })
+function processArgs() {
+  if (process.argv.length < 3)
+    throw 'Usage: node index.js [organization slug]'
 
   let teams = res.organization.teams.nodes
 
@@ -22,6 +25,8 @@ async function main() {
 
   while (hasNextPage) {
     let cursor = res.organization.teams.pageInfo.endCursor
+  global.org = process.argv[2]
+}
 
     res = await client
       .request(queries.teamBatch, {org: 'codeschool', teamCursor: cursor})
@@ -33,6 +38,7 @@ async function main() {
     teams = teams.concat(res.organization.teams.nodes)
   await token.getToken()
   await audit.setupClient()
+  await processArgs()
 
     hasNextPage = res.organization.teams.pageInfo.hasNextPage
   }
