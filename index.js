@@ -1,16 +1,8 @@
-let { GraphQLClient } = require('graphql-request')
 let queries = require('./util/query.js')
+let audit = require('./lib/audit.js')
 let token = require('./util/token.js')
 
 async function main() {
-
-  const client = new GraphQLClient(
-    'https://api.github.com/graphql',
-    {
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    })
 
 
   const variables = {
@@ -40,6 +32,7 @@ async function main() {
 
     teams = teams.concat(res.organization.teams.nodes)
   await token.getToken()
+  await audit.setupClient()
 
     hasNextPage = res.organization.teams.pageInfo.hasNextPage
   }
