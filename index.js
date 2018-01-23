@@ -1,10 +1,8 @@
 let { GraphQLClient } = require('graphql-request')
 let queries = require('./util/query.js')
-let fs = require('fs')
+let token = require('./util/token.js')
 
 async function main() {
-
-  const token = fs.readFileSync('token.secret', 'utf8').trim()
 
   const client = new GraphQLClient(
     'https://api.github.com/graphql',
@@ -41,6 +39,7 @@ async function main() {
       })
 
     teams = teams.concat(res.organization.teams.nodes)
+  await token.getToken()
 
     hasNextPage = res.organization.teams.pageInfo.hasNextPage
   }
