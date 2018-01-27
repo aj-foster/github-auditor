@@ -104,7 +104,7 @@ exports.userInitialBatch = `
   }
 `
 
-exports.userInitialBatch = `
+exports.userBatch = `
   query TeamQuery($org: String!, $teamSlug: String!, $userCursor: String!) {
     organization(login: $org) {
       team(slug: $teamSlug) {
