@@ -1,13 +1,14 @@
 let audit = require('./lib/audit.js')
 let token = require('./util/token.js')
 let L = require('./util/logger.js')
+let fs = require('fs')
 
 /* Process Command-Line Arguments
  *
  * We expect the user to pass in the name of the organization to query as the
  * first (and only) argument.
  */
-function processArgs() {
+const processArgs = function () {
   if (process.argv.length < 3)
     throw 'Usage: node index.js [organization slug]'
 
@@ -29,7 +30,29 @@ async function main() {
 
   const teams = await audit.queryTeams()
 
-  L.debug(require('util').inspect(teams, { depth: null }))
+  const data = []
+
+  for (let i = 0; i < teams.length; i++) {
+    const {name, slug} = teams[i]
+
+    L.debug('[' + slug + '] Querying repositories')
+    const rawRepos = await audit.queryRepos(slug)
+    const repos = await audit.cleanRepos(rawRepos)
+
+    L.debug('[' + slug + '] Querying members')
+    const users = await audit.queryUsers(slug)
+
+    data.push({
+      name: name,
+      slug: slug,
+      repos: repos,
+      users: users
+    })
+  }
+
+
+  L.debug(require('util').inspect(data, { depth: null }))
+  fs.writeFileSync('' + global.org + '.json', JSON.stringify({organization: global.org, teams: data}))
 }
 
 // Let's kick things off.
