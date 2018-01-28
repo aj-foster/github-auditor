@@ -29,21 +29,20 @@ async function main() {
   await writer.setup()
   await processArgs()
 
-  const teams = await audit.queryTeams()
+  const rawTeams = await audit.queryTeams()
+  const teams = []
 
-  const data = []
-
-  for (let i = 0; i < teams.length; i++) {
-    const {name, slug} = teams[i]
+  for (let i = 0; i < rawTeams.length; i++) {
+    const {name, slug} = rawTeams[i]
 
     L.debug('[' + slug + '] Querying repositories')
-    const rawRepos = await audit.queryRepos(slug)
-    const repos = await audit.cleanRepos(rawRepos)
+    const rawRepos = await audit.queryTeamRepos(slug)
+    const repos = await audit.cleanTeamRepos(rawRepos)
 
     L.debug('[' + slug + '] Querying members')
-    const users = await audit.queryUsers(slug)
+    const users = await audit.queryTeamUsers(slug)
 
-    data.push({
+    teams.push({
       name: name,
       slug: slug,
       repos: repos,
