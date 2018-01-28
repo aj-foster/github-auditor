@@ -213,3 +213,39 @@ exports.repoUserBatch = `
     }
   }
 `
+
+exports.userInitialBatch = `
+  query UserInitialBatch($org: String!) {
+    organization(login: $org) {
+      members(first: 100) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+
+        nodes {
+          name
+          login
+        }
+      }
+    }
+  }
+`
+
+exports.userBatch = `
+  query UserBatch($org: String!, $userCursor: String!) {
+    organization(login: $org) {
+      members(first: 100, after: $userCursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+
+        nodes {
+          name
+          login
+        }
+      }
+    }
+  }
+`

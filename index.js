@@ -66,6 +66,9 @@ async function main() {
       collaborators: collabs
     })
   }
+
+  L.debug('Querying all organization members')
+  const users = await audit.queryUsers()
 }
 
 // Let's kick things off.
