@@ -1,7 +1,7 @@
 let audit = require('./lib/audit.js')
 let token = require('./util/token.js')
+let writer = require('./util/writer.js')
 let L = require('./util/logger.js')
-let fs = require('fs')
 
 /* Process Command-Line Arguments
  *
@@ -26,6 +26,7 @@ async function main() {
 
   await token.getToken()
   await audit.setupClient()
+  await writer.setup()
   await processArgs()
 
   const teams = await audit.queryTeams()
@@ -52,7 +53,7 @@ async function main() {
 
 
   L.debug(require('util').inspect(data, { depth: null }))
-  fs.writeFileSync('' + global.org + '.json', JSON.stringify({organization: global.org, teams: data}))
+  await writer.write({organization: global.org, teams: data})
 }
 
 // Let's kick things off.
