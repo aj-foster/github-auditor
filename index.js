@@ -69,6 +69,13 @@ async function main() {
 
   L.debug('Querying all organization members')
   const users = await audit.queryUsers()
+
+  await writer.write({
+    organization: global.org,
+    teams: teams,
+    repositories: repos,
+    users: users
+  })
 }
 
 // Let's kick things off.
