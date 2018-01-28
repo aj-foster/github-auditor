@@ -161,3 +161,55 @@ exports.repoBatch = `
     }
   }
 `
+
+exports.repoUserInitialBatch = `
+  query RepoUserInitialBatch($org: String!, $repoName: String!) {
+    organization(login: $org) {
+      repository(name: $repoName) {
+        name
+
+        collaborators(first: 100, affiliation: DIRECT) {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+
+          edges {
+            permission
+
+            node {
+              name
+              login
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+exports.repoUserBatch = `
+  query RepoUserBatch($org: String!, $repoName: String!, $userCursor: String!) {
+    organization(login: $org) {
+      repository(name: $repoName) {
+        name
+
+        collaborators(first: 100, after: $userCursor, affiliation: DIRECT) {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+
+          edges {
+            permission
+
+            node {
+              name
+              login
+            }
+          }
+        }
+      }
+    }
+  }
+`

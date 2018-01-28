@@ -50,9 +50,22 @@ async function main() {
     })
   }
 
+  const rawRepos = await audit.queryRepos()
+  const repos = []
 
-  L.debug(require('util').inspect(data, { depth: null }))
-  await writer.write({organization: global.org, teams: data})
+  for (let i = 0; i < rawRepos.length; i++) {
+    const {name, private: priv} = rawRepos[i]
+
+    L.debug('[' + name + '] Querying collaborators')
+    const rawCollabs = await audit.queryRepoUsers(name)
+    const collabs = await audit.cleanRepoUsers(rawCollabs)
+
+    repos.push({
+      name: name,
+      private: priv,
+      collaborators: collabs
+    })
+  }
 }
 
 // Let's kick things off.
