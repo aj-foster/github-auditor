@@ -137,7 +137,7 @@ exports.repoInitialBatch = `
 
         nodes {
           name
-          isPrivate
+          private: isPrivate
         }
       }
     }
@@ -155,7 +155,7 @@ exports.repoBatch = `
 
         nodes {
           name
-          isPrivate
+          private: isPrivate
         }
       }
     }
