@@ -36,8 +36,8 @@ exports.teamBatch = `
   }
 `
 
-exports.repoInitialBatch = `
-  query TeamQuery($org: String!, $teamSlug: String!) {
+exports.teamRepoInitialBatch = `
+  query TeamRepoInitialBatch($org: String!, $teamSlug: String!) {
     organization(login: $org) {
       team(slug: $teamSlug) {
         slug
@@ -59,8 +59,8 @@ exports.repoInitialBatch = `
   }
 `
 
-exports.repoBatch = `
-  query TeamQuery($org: String!, $teamSlug: String!, $repoCursor: String!) {
+exports.teamRepoBatch = `
+  query TeamRepoBatch($org: String!, $teamSlug: String!, $repoCursor: String!) {
     organization(login: $org) {
       team(slug: $teamSlug) {
         slug
@@ -82,8 +82,8 @@ exports.repoBatch = `
   }
 `
 
-exports.userInitialBatch = `
-  query TeamQuery($org: String!, $teamSlug: String!) {
+exports.teamUserInitialBatch = `
+  query TeamUserInitialBatch($org: String!, $teamSlug: String!) {
     organization(login: $org) {
       team(slug: $teamSlug) {
         slug
@@ -104,8 +104,8 @@ exports.userInitialBatch = `
   }
 `
 
-exports.userBatch = `
-  query TeamQuery($org: String!, $teamSlug: String!, $userCursor: String!) {
+exports.teamUserBatch = `
+  query TeamUserBatch($org: String!, $teamSlug: String!, $userCursor: String!) {
     organization(login: $org) {
       team(slug: $teamSlug) {
         slug
