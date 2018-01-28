@@ -125,3 +125,39 @@ exports.teamUserBatch = `
     }
   }
 `
+
+exports.repoInitialBatch = `
+  query RepoInitialBatch($org: String!) {
+    organization(login: $org) {
+      repositories(first: 100) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+
+        nodes {
+          name
+          isPrivate
+        }
+      }
+    }
+  }
+`
+
+exports.repoBatch = `
+  query RepoBatch($org: String!, $repoCursor: String!) {
+    organization(login: $org) {
+      repositories(first: 100, after: $repoCursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+
+        nodes {
+          name
+          isPrivate
+        }
+      }
+    }
+  }
+`
