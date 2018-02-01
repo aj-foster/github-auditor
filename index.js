@@ -64,7 +64,8 @@ const retrieve = async function() {
     teams: teams,
     repositories: repos,
     users: users,
-    login: viewer
+    login: viewer,
+    time: (new Date(Date.now())).toDateString()
   })
 }
 
