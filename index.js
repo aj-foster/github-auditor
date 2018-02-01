@@ -1,6 +1,7 @@
 let audit = require('./lib/audit.js')
 let token = require('./util/token.js')
 let writer = require('./util/writer.js')
+let reporter = require('./lib/report.js')
 let L = require('./util/logger.js')
 
 
@@ -65,6 +66,17 @@ const retrieve = async function() {
     users: users,
     login: viewer
   })
+}
+
+
+/* Data Reporting
+ *
+ * This functions runs the steps necessary to report existing audit data from
+ * GitHub. It is assumed that retrieve() has either just run, or was run at
+ * some point in the past with its JSON files remaining.
+ */
+const report = async function() {
+  reporter.test()
 }
 
 
