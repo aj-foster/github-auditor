@@ -3,17 +3,6 @@ let token = require('./util/token.js')
 let writer = require('./util/writer.js')
 let L = require('./util/logger.js')
 
-/* Process Command-Line Arguments
- *
- * We expect the user to pass in the name of the organization to query as the
- * first (and only) argument.
- */
-const processArgs = function () {
-  if (process.argv.length < 3)
-    throw 'Usage: node index.js [organization slug]'
-
-  global.org = process.argv[2]
-}
 
 /* Data Retrieval
  *
@@ -78,3 +67,32 @@ const retrieve = async function() {
   })
 }
 
+
+/* Process Command-Line Arguments
+ *
+ * We expect the user either to pass in the name of the organization to query
+ * as the first (and only) argument, or to pass in a verb (retrieve | report)
+ * followed by the name of the organization.
+ */
+if (process.argv.length < 3)
+  throw 'Usage: node index.js [organization slug]'
+
+if (process.argv.length > 3) {
+  global.org = process.argv[3]
+
+  if (process.argv[2] === 'retrieve') {
+    retrieve()
+  }
+
+  if (process.argv[2] === 'report') {
+    report()
+  }
+}
+else {
+  global.org = process.argv[2];
+
+  (async function () {
+    await retrieve()
+    await report()
+  })()
+}
