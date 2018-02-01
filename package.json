@@ -27,6 +27,7 @@
     "eslint": "^4.15.0"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
     "graphql-request": "^1.4.1"
   }
 }
