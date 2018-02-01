@@ -77,7 +77,7 @@ const retrieve = async function() {
  * some point in the past with its JSON files remaining.
  */
 const report = async function() {
-  reporter.test()
+  reporter.render()
 }
 
 
