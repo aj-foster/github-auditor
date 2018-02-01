@@ -70,7 +70,7 @@ async function main() {
   L.debug('Querying all organization members')
   const users = await audit.queryUsers()
 
-  await writer.write({
+  await writer.writeJSON({
     organization: global.org,
     teams: teams,
     repositories: repos,

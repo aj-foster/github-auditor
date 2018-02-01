@@ -2,6 +2,9 @@ let fs = require('fs')
 let L = require('./logger.js')
 
 const outputDir = 'output'
+const jsonFile = function () {
+  return outputDir + '/' + global.org + '.json'
+}
 
 exports.setup = function () {
   if (!fs.existsSync(outputDir)) {
@@ -10,9 +13,9 @@ exports.setup = function () {
   }
 }
 
-exports.write = function (data) {
-  const outputFile = outputDir + '/' + global.org + '.json'
-
-  L.debug('Writing output file, ' + outputFile)
-  fs.writeFileSync(outputFile, JSON.stringify(data))
+exports.writeJSON = function (data) {
+  L.debug('Writing output file, ' + jsonFile())
+  fs.writeFileSync(jsonFile(), JSON.stringify(data))
 }
+
+exports.jsonFile = jsonFile
