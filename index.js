@@ -15,19 +15,18 @@ const processArgs = function () {
   global.org = process.argv[2]
 }
 
-/* Main Function
+/* Data Retrieval
  *
- * This function is called at the bottom of this file to run everything. It
- * will utilize functions defined in various other modules and generally
- * control the flow of execution. Due to the nature of the program, we require
- * the steps taken in this function to be done syncronously.
+ * This function runs (sequentially) all of the steps necessary to retrieve
+ * audit data from GitHub.
  */
-async function main() {
+const retrieve = async function() {
 
   await token.getToken()
   await audit.setupClient()
   await writer.setup()
-  await processArgs()
+
+  const viewer = await audit.testClient()
 
   const rawTeams = await audit.queryTeams()
   const teams = []
@@ -74,9 +73,8 @@ async function main() {
     organization: global.org,
     teams: teams,
     repositories: repos,
-    users: users
+    users: users,
+    login: viewer
   })
 }
 
-// Let's kick things off.
-main()

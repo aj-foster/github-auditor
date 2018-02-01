@@ -1,5 +1,18 @@
 // Prewritten queries for gathering team, repo, and member info.
 
+exports.initialRequest = `
+  query InitialRequest($org: String!) {
+    viewer {
+      login
+    }
+
+    organization(login: $org) {
+      viewerIsAMember
+      viewerCanAdminister
+    }
+  }
+`
+
 exports.teamInitialBatch = `
   query TeamInitialBatch($org: String!) {
     organization(login: $org) {
