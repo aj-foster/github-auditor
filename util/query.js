@@ -239,6 +239,7 @@ exports.userInitialBatch = `
         nodes {
           name
           login
+          avatarUrl
         }
       }
     }
@@ -257,6 +258,7 @@ exports.userBatch = `
         nodes {
           name
           login
+          avatarUrl
         }
       }
     }
