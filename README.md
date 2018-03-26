@@ -31,3 +31,17 @@ Finally, run the auditor by passing the URL-friendly name ("login") of the organ
 ```shell
 node index.js [organization]
 ```
+
+Results can be found in `output/[organization].html`.
+
+
+### Advanced
+
+The creation of an audit has two distinct steps: retrieving information from the GitHub API, and creating an HTML report of the data. In between these steps, the data is saved in a JSON format (`output/[organization].json`) which you may use for your own purposes.
+
+To run one step or the other individually, use:
+
+```shell
+node index.js retrieve [organization]
+node index.js report [organization]
+```
