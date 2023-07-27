@@ -230,7 +230,7 @@ exports.repoUserBatch = `
 exports.userInitialBatch = `
   query UserInitialBatch($org: String!) {
     organization(login: $org) {
-      members(first: 100) {
+      membersWithRole(first: 100) {
         pageInfo {
           hasNextPage
           endCursor
@@ -249,7 +249,7 @@ exports.userInitialBatch = `
 exports.userBatch = `
   query UserBatch($org: String!, $userCursor: String!) {
     organization(login: $org) {
-      members(first: 100, after: $userCursor) {
+      membersWithRole(first: 100, after: $userCursor) {
         pageInfo {
           hasNextPage
           endCursor
